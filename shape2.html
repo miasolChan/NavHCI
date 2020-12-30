@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Boosrtarp -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- sheetjs -->
+    <script src="./lib/sheetjs-dist/xlsx.full.min.js"></script>
+    <script src="./js/export.js"></script>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/data.js"></script>
+    <title>导航栏实验1</title>
+
+</head>
+<script>
+
+</script>
+<body >
+    <div class="box">
+        <h2 id="testCnt">实验次数：0/90</h2>
+        <h3 id="tips">请输入“实验者姓名”并“开始实验”</h3>
+    </div>
+    <div class="box">
+        <div class="input-group input-table">
+            <input id="part" type="text" class="form-control" placeholder="实验者" >
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" onclick="setPart()">确定</button>
+            </span>
+          </div><!-- /input-group -->
+    </div>
+    
+    <div class="box r-box">
+        <button id="s-btn" class="btn btn-success" onclick="startTest(2)">开始实验</button>
+        <button id="r-btn" class="btn btn-warning" onclick="btn_export()">导出结果</button>
+    </div>
+    <div class="intro-box">
+        <ol class="breadcrumb ol-font">
+            <li class="active mydata">Data</li>
+            <li class="active mydata">Data</li>
+            <li class="active mydata">Data</li>
+          </ol>
+    </div>
+    
+    <div id="opt-group" class="box opt2">
+        <div>
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                下拉菜单
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li value="0" onclick="getNum(this)" role="presentation">
+                    <a href="#">01</a>
+                </li>
+                <li value="1" onclick="getNum(this)" role="presentation"><a href="#">02</a></li>
+                <li  value="2" onclick="getNum(this)" role="presentation"><a>03</a></li>
+                
+            </ul>
+        </div>
+        
+        <div>
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                下拉菜单
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li  value="3" onclick="getNum(this)" role="presentation"><a role="menuitem" tabindex="-1" href="#">04</a></li>
+                <li  value="4" onclick="getNum(this)" role="presentation"><a role="menuitem" tabindex="-1" href="#">05</a></li>
+                <li  value="5" onclick="getNum(this)" role="presentation"><a role="menuitem" tabindex="-1" href="#">06</a></li>
+    
+            </ul>
+        </div>
+
+        <div>
+
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                下拉菜单
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li value="6" onclick="getNum(this)" role="presentation"><a role="menuitem" tabindex="-1" href="#">07</a></li>
+                <li value="7" onclick="getNum(this)" role="presentation"><a role="menuitem" tabindex="-1" href="#">08</a></li>
+                <li value="8" onclick="getNum(this)" role="presentation"><a role="menuitem" tabindex="-1" href="#">09</a></li>
+    
+            </ul>
+        </div>
+
+        <div>
+
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                下拉菜单
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li value="9" onclick="getNum(this)"role="presentation"><a role="menuitem" tabindex="-1" href="#">10</a></li>
+                <li value="10" onclick="getNum(this)"role="presentation"><a role="menuitem" tabindex="-1" href="#">11</a></li>
+                <li value="11" onclick="getNum(this)"role="presentation"><a role="menuitem" tabindex="-1" href="#">12</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                下拉菜单
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li value="12" onclick="getNum(this)"role="presentation"><a role="menuitem" tabindex="-1" href="#">13</a></li>
+                <li value="13" onclick="getNum(this)"role="presentation"><a role="menuitem" tabindex="-1" href="#">14</a></li>
+                <li value="14" onclick="getNum(this)"role="presentation"><a role="menuitem" tabindex="-1" href="#">15</a></li>
+    
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+
+    
+</body>
+</html>
+

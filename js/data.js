@@ -12,8 +12,12 @@ var OPTIONS = [
     [4,12,11],
     [9,5,6]
 ]
+//实验者
+var PAERTICIPANT = "x"
 //实验重复 max=3
 var REPETITION = 0;
+//导航栏样式
+var SHAPE = 0 ;
 //组数 max = 3
 var BLOCK=1;
 //时间
@@ -51,6 +55,13 @@ function btn_export() {
     var sheet = XLSX.utils.aoa_to_sheet(aoa);
     openDownloadDialog(sheet2blob(sheet), '导出.xlsx');
 }
+//设置实验者
+function setPart(){
+    var input = document.getElementById("part");
+    PAERTICIPANT = input.value;
+    console.log(PAERTICIPANT);
+    
+}
 //插入按钮
 function initBtn(){
     var div = document.getElementById("opt-group");
@@ -58,12 +69,26 @@ function initBtn(){
         div.innerHTML += "<button onclick=\"getNum(this)\" type=\"button\" class=\"btn btn-primary btn-pad btn-mar\" value=\""+i+"\">"+ARR[i]+"</button>"
     }
 }
-
-function startTest(){
+var isStart = false
+function startTest(s){
+    //是否开始
+    isStart = true;
+    //设置shape
+    SHAPE = s;
+    //
+    if(cnt<=getSum()){
+        cnt++;
+        ERROR=0;
+    }else{
+        console.log("实验结束");
+        getTips(0);
+        return;
+    }
+    //显示实验者姓名
+    var input = document.getElementById("part");
+    input.value = PAERTICIPANT;
     //开始计时
     startTime = new Date();
-    //
-    cnt++;
     //选出一组数据
     addRep();
     var datas = OPTIONS[OPT];
@@ -77,18 +102,30 @@ function startTest(){
     dataArr[2].innerText= ARR[datas[2]]; 
     //显示实验次数
     var showCnt = document.getElementById("testCnt");
-    showCnt.innerText = cnt + "/"+getSum();
+    showCnt.innerText = "实验次数："+cnt + "/"+getSum();
+    //Tips显示
+    getTips(1);
 }
 function addExcel(){
-
-    aoa.push(result.toAOA("hhh",OPT+1,1,REPETITION,BLOCK,TIME,ERROR));
+    aoa.push(result.toAOA(PAERTICIPANT,OPT+1,1,REPETITION,BLOCK,TIME,ERROR));
     console.log("aoa"+aoa);
 }
-function calculateTime(){
-    
+// 
+function getTips(flag){
+    var tips = document.getElementById("tips");
+    if(flag){
+        tips.innerText = "第"+cnt+"次，开始"
+    }
+    else if(cnt!=getSum()){
+        tips.innerText = "结束，点击\"开始\"进行下一次"
+    }else{
+        tips.innerText = "本次实验结束，点击\"导出\"excel"
+    }
 }
 //
 function getNum(obj){
+    if(!isStart) return;
+
     var num = obj.value;
     if(dataCopy.length>0){
         var data = dataCopy.shift();
@@ -101,6 +138,8 @@ function getNum(obj){
                 TIME = endTime - startTime; 
                 //写入EXCEL
                 addExcel();
+                //
+                getTips(0);
             }
         }else{
             dataCopy.unshift(data);

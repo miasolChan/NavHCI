@@ -1,3 +1,4 @@
+
 .box{
     width: 55%;
     margin: 20px auto;
@@ -13,16 +14,29 @@
 .intro-box{
     width: 60%;
     height: 100px;
-    margin: 5% auto;
+    margin: 5% auto 0 auto;
 }
 .ol-font{
     text-align: center;
     font-size:5vh;
 }
 .r-box{
-    padding-top: 50px;
     text-align: left;
 }
 #s-btn{
     opacity: 1;
+}
+.input-table{
+    width: 30vh;
+    position: relative;
+}
+#tips{
+    color: brown;
+}
+.opt2{
+   display: flex;
+   justify-content: center;
+}
+.opt2 div{
+    margin-right: 10px;
 }

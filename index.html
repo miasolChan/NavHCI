@@ -20,6 +20,18 @@
 
 </script>
 <body onload="initBtn()">
+    <div class="box">
+        <h2 id="testCnt">实验次数：0/90</h2>
+        <h3 id="tips">请输入“实验者姓名”并“开始实验”</h3>
+    </div>
+    <div class="box">
+        <div class="input-group input-table">
+            <input id="part" type="text" class="form-control" placeholder="实验者" >
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" onclick="setPart()">确定</button>
+            </span>
+          </div><!-- /input-group -->
+    </div>
     <div class="intro-box">
         <ol class="breadcrumb ol-font">
             <li class="active mydata">Data</li>
@@ -27,15 +39,16 @@
             <li class="active mydata">Data</li>
           </ol>
     </div>
+    
     <div class="box" id="opt-group">
 
     </div>
 
     <div class="box r-box">
-        <button id="s-btn" class="btn btn-success" onclick="startTest()">开始实验</button>
+        <button id="s-btn" class="btn btn-success" onclick="startTest(1)">开始实验</button>
         <button id="r-btn" class="btn btn-warning" onclick="btn_export()">导出结果</button>
-        <h1 id="testCnt">0/90</h1>
     </div>
+
     
 </body>
 </html>
