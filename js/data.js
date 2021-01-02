@@ -1,5 +1,5 @@
 //实验数据
-var ARR = ["01","02","03","04","05","06","07","08","09","10","11","12","13","14","15"];
+var ARR = ["橙汁","奶茶","可乐","苹果","橙子","香蕉","蛋糕","面包","布丁","铅笔","钢笔","橡皮","篮球","足球","排球"];
 var OPTIONS = [
     [12,8,3],
     [4,7,2],
@@ -27,15 +27,17 @@ var ERROR=0;
 //当前显示数据在OPTION中的index，对应表中option
 var OPT = 0;
 //当前实验次数
-var cnt = 0;
+var cnt = 36;
 //
 var dataCopy = [0,0,0];
 var startTime = new Date();
 var endTime = new Date();
 
+//aoa
 var aoa = [
-    ['participant参与者', 'option','shape', 'repetition重复','block组数','time','error'],
+    ['participant', 'option','shape', 'repetition','block','time','error'],
 ];
+//结果集对象
 var result ={
     "participant":"hhhh",
     "option":0,
@@ -50,25 +52,40 @@ var result ={
         return a;
       }
 }
+/**
+ * 导出按钮
+ * 
+ * */
 function btn_export() {
-
+    //导出表
     var sheet = XLSX.utils.aoa_to_sheet(aoa);
-    openDownloadDialog(sheet2blob(sheet), '导出.xlsx');
+    //导出文件名
+    var str = PAERTICIPANT + '样式' + SHAPE +'导出.xlsx'
+    openDownloadDialog(sheet2blob(sheet), str);
 }
-//设置实验者
+
+/**
+ * 设置实验者
+ */
 function setPart(){
     var input = document.getElementById("part");
     PAERTICIPANT = input.value;
     console.log(PAERTICIPANT);
     
 }
-//插入按钮
+/**
+ * 插入按钮
+ */
+
 function initBtn(){
     var div = document.getElementById("opt-group");
     for(var i=0;i<15;i++){
         div.innerHTML += "<button onclick=\"getNum(this)\" type=\"button\" class=\"btn btn-primary btn-pad btn-mar\" value=\""+i+"\">"+ARR[i]+"</button>"
     }
 }
+/**
+ * 开始实验
+ */
 var isStart = false
 function startTest(s){
     //是否开始
@@ -106,11 +123,16 @@ function startTest(s){
     //Tips显示
     getTips(1);
 }
+/**
+ * AOA添加
+ */
 function addExcel(){
-    aoa.push(result.toAOA(PAERTICIPANT,OPT+1,1,REPETITION,BLOCK,TIME,ERROR));
+    aoa.push(result.toAOA(PAERTICIPANT,OPT+1,SHAPE,REPETITION,BLOCK,TIME,ERROR));
     console.log("aoa"+aoa);
 }
-// 
+/**
+ * 获取提示文字
+ */
 function getTips(flag){
     var tips = document.getElementById("tips");
     if(flag){
@@ -122,7 +144,9 @@ function getTips(flag){
         tips.innerText = "本次实验结束，点击\"导出\"excel"
     }
 }
-//
+/**
+ * 获取当前点击的index
+ */
 function getNum(obj){
     if(!isStart) return;
 
@@ -138,7 +162,7 @@ function getNum(obj){
                 TIME = endTime - startTime; 
                 //写入EXCEL
                 addExcel();
-                //
+                //获取提示文字
                 getTips(0);
             }
         }else{
@@ -149,11 +173,15 @@ function getNum(obj){
     }
     
 }
-//实验总次数
+/**
+ * 实验总数
+ */
 function getSum(){
     return 3*3*10;
 }
-
+/**
+ * REPETITION增加一次
+ */
 function addRep(){
     REPETITION++;
     if(REPETITION==4){
@@ -162,6 +190,9 @@ function addRep(){
         addOpt();
     }
 }
+/**
+ * SHAPE增加一次
+ */
 function addOpt(){
     OPT++;
     if(OPT==10){
@@ -170,6 +201,9 @@ function addOpt(){
         addBlock();
     }
 }
+/**
+ * BLOCK增加一次
+ */
 function addBlock(){
     BLOCK++;
     if(BLOCK ==4){
